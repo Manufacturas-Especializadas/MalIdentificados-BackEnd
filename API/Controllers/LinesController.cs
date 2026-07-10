@@ -30,5 +30,23 @@ namespace API.Controllers
 
             return CreatedAtAction(nameof(GetLines), new { id = lineId }, lineId);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateLine(int id, [FromBody] UpdateLineCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest("El ID de la ruta no coincide con el ID del objeto.");
+            }
+
+            var success = await _mediator.Send(command);
+
+            if (!success)
+            {
+                return NotFound($"No se encontró la línea con el ID {id}.");
+            }
+
+            return NoContent();
+        }
     }
 }
