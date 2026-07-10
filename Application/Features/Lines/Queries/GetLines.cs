@@ -2,10 +2,7 @@
 
 namespace Application.Features.Lines.Queries
 {
-    public class GetLines
-    {
-        public record LineDto(int Id, string LineName, bool IsActive, DateTime CreatedAt);
+    public record LineDto(int Id, string LineName, bool IsActive, DateTime CreatedAt);
 
-        public record GetLinesQuery() : IRequest<List<LineDto>>;
-    }
+    public record GetLinesQuery() : IRequest<List<LineDto>>;
 }
