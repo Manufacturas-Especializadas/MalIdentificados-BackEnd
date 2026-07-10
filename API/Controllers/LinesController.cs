@@ -48,5 +48,18 @@ namespace API.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteLine(int id)
+        {
+            var success = await _mediator.Send(new DeleteLineCommand(id));
+
+            if (!success)
+            {
+                return NotFound($"No se encontró la línea con el ID {id}.");
+            }
+
+            return NoContent();
+        }
     }
 }
