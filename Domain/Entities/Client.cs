@@ -1,10 +1,10 @@
 ﻿namespace Domain.Entities
 {
-    public class Line
+    public class Client
     {
         public int Id { get; set; }
 
-        public string LineName { get; set; } = string.Empty;
+        public string ClientName { get; set; } = string.Empty;
 
         public bool IsActive { get; set; } = true;
 
