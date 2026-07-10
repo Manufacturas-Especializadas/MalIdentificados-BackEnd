@@ -1,5 +1,4 @@
-﻿using static Application.Features.Lines.Queries.GetLines;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Application.Common.Interfaces;
 using MediatR;
 
