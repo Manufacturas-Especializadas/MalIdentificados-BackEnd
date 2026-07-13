@@ -16,14 +16,14 @@ namespace API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet("getLines")]
         public async Task<ActionResult<List<LineDto>>> GetLines()
         {
             var result = await _mediator.Send(new GetLinesQuery());
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<int>> CreateLine([FromBody] CreateLineCommand command)
         {
             var lineId = await _mediator.Send(command);
@@ -31,7 +31,7 @@ namespace API.Controllers
             return CreatedAtAction(nameof(GetLines), new { id = lineId }, lineId);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateLine(int id, [FromBody] UpdateLineCommand command)
         {
             if (id != command.Id)
@@ -49,7 +49,7 @@ namespace API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteLine(int id)
         {
             var success = await _mediator.Send(new DeleteLineCommand(id));
