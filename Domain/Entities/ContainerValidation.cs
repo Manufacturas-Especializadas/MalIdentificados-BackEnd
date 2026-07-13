@@ -6,9 +6,9 @@
 
         public string ContainerNumber { get; set; } = string.Empty;
 
-        public int PayrollNumber { get; set; }
+        public int? PayrollNumber { get; set; }
 
-        public int IdPartNumber { get; set; }
+        public int? IdPartNumber { get; set; }
 
         public int RequiredQuantity { get; set; }
 
