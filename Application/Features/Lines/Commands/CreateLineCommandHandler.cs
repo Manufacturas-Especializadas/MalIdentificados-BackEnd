@@ -18,7 +18,7 @@ namespace Application.Features.Lines.Commands
 
             DateTime nowInMexico = TimeZoneInfo.ConvertTime(DateTime.UtcNow, mexicoTimeZone);
 
-            var newLine = new Line
+            var newLine = new Domain.Entities.Lines
             {
                 LineName = request.LineName,
                 CreatedAt = nowInMexico,

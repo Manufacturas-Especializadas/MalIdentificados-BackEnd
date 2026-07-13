@@ -10,7 +10,7 @@ namespace Infrastructure.Persistence
         {
         }
 
-        public DbSet<Line> Lines => Set<Line>();
+        public DbSet<Lines> Lines => Set<Lines>();
 
         public DbSet<Client> Clients => Set<Client>();
 
@@ -24,7 +24,7 @@ namespace Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Line>(entity =>
+            modelBuilder.Entity<Lines>(entity =>
             {
                 entity.ToTable("Lines");
                 entity.HasKey(e => e.Id);
