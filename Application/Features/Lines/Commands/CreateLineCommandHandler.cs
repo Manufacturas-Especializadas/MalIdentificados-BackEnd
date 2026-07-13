@@ -1,9 +1,10 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
+using MediatR;
 
 namespace Application.Features.Lines.Commands
 {
-    public class CreateLineCommandHandler
+    public class CreateLineCommandHandler : IRequestHandler<CreateLineCommand, int>
     {
         private readonly IApplicationDbContext _context;
 
