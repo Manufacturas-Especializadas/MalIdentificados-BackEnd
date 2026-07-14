@@ -16,6 +16,8 @@
 
         public string? Status { get; set; }
 
+        public string? ExpectedPartCode { get; set; }
+
         public PartNumber? PartNumber { get; set; }
 
         public ICollection<ScanDetail> ScanDetails { get; set; } = new List<ScanDetail>();

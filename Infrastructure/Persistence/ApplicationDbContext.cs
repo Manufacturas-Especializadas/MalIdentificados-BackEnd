@@ -70,6 +70,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.ContainerNumber).HasColumnName("containerNumber").IsRequired();
                 entity.Property(e => e.PayrollNumber).HasColumnName("payrollNumber");
+                entity.Property(e => e.ExpectedPartCode).HasColumnName("expectedPartCode");
                 entity.Property(e => e.IdPartNumber).HasColumnName("idPartNumber");
                 entity.Property(e => e.RequiredQuantity).HasColumnName("requiredQuantity");
                 entity.Property(e => e.ScannedQuantity).HasColumnName("scannedQuantity");
