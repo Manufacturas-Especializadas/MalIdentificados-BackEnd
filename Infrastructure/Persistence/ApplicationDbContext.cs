@@ -70,8 +70,9 @@ namespace Infrastructure.Persistence
             {
                 entity.ToTable("ContainerValidations");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.ContainerNumber).HasColumnName("containerNumber").IsRequired();
-                entity.Property(e => e.PayrollNumber).HasColumnName("payrollNumber");
+                entity.Property(e => e.ContainerNumber).HasColumnName("containerNumber").IsRequired(false);
+                entity.Property(e => e.IdPartNumber).HasColumnName("idPartNumber").IsRequired(false);
+                entity.Property(e => e.PayrollNumber).HasColumnName("payrollNumber").IsRequired(false);
                 entity.Property(e => e.ExpectedPartCode).HasColumnName("expectedPartCode");
                 entity.Property(e => e.IdPartNumber).HasColumnName("idPartNumber");
                 entity.Property(e => e.RequiredQuantity).HasColumnName("requiredQuantity");
@@ -88,6 +89,7 @@ namespace Infrastructure.Persistence
             {
                 entity.ToTable("ScanDetails");
                 entity.HasKey(e => e.Id);
+                entity.Ignore(e => e.ReleasedBy);
                 entity.Property(e => e.IdValidation).HasColumnName("idValidation");
                 entity.Property(e => e.ScannedPartCode).HasColumnName("scannedPartCode").HasMaxLength(100).IsRequired();
                 entity.Property(e => e.IsCorrect).HasColumnName("isCorrect");
