@@ -96,7 +96,11 @@ namespace Infrastructure.Persistence
                 entity.HasOne(d => d.ContainerValidation)
                     .WithMany(p => p.ScanDetails)
                     .HasForeignKey(d => d.IdValidation)
-                    .OnDelete(DeleteBehavior.Cascade); 
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.Property(e => e.ReleasedByPayroll)
+                      .HasColumnName("releasedByPayroll")
+                      .IsRequired(false);
             });
         }
     }
