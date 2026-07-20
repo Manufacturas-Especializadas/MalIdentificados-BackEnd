@@ -10,6 +10,7 @@ namespace Application.Common.Interfaces
         DbSet<PartNumber> PartNumbers { get; }
         DbSet<ContainerValidation> ContainerValidations { get; }
         DbSet<ScanDetail> ScanDetails { get; }
+        DbSet<QualityApprover> QualityApprovers { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

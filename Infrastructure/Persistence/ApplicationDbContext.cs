@@ -20,6 +20,8 @@ namespace Infrastructure.Persistence
 
         public DbSet<ScanDetail> ScanDetails => Set<ScanDetail>();
 
+        public DbSet<QualityApprover> QualityApprovers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
