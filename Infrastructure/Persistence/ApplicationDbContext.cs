@@ -20,7 +20,7 @@ namespace Infrastructure.Persistence
 
         public DbSet<ScanDetail> ScanDetails => Set<ScanDetail>();
 
-        public DbSet<QualityApprover> QualityApprovers { get; set; }
+        //public DbSet<QualityApprover> QualityApprovers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -89,7 +89,7 @@ namespace Infrastructure.Persistence
             {
                 entity.ToTable("ScanDetails");
                 entity.HasKey(e => e.Id);
-                entity.Ignore(e => e.ReleasedBy);
+                //entity.Ignore(e => e.ReleasedBy);
                 entity.Property(e => e.IdValidation).HasColumnName("idValidation");
                 entity.Property(e => e.ScannedPartCode).HasColumnName("scannedPartCode").HasMaxLength(100).IsRequired();
                 entity.Property(e => e.IsCorrect).HasColumnName("isCorrect");

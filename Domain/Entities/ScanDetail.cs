@@ -14,7 +14,7 @@
 
         public int? ReleasedByPayroll { get; set; }
 
-        public QualityApprover? ReleasedBy { get; set; }
+        //public QualityApprover? ReleasedBy { get; set; }
 
         public ContainerValidation? ContainerValidation { get; set; }
     }
