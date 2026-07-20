@@ -19,6 +19,17 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+var allowedConnection = builder.Configuration.GetValue<string>("OrigenesPermitidos")!.Split(',');
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins(allowedConnection)
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 app.UseSwagger();
@@ -26,6 +37,8 @@ app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "MAL IDENTIFICADOS API v1");
 });
+
+app.UseCors("AllowSpecificOrigins");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

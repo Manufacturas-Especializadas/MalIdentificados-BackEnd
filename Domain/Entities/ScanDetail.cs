@@ -12,6 +12,10 @@
 
         public DateTime ScanDate { get; set; } = DateTime.UtcNow;
 
+        public int? ReleasedByPayroll { get; set; }
+
+        //public QualityApprover? ReleasedBy { get; set; }
+
         public ContainerValidation? ContainerValidation { get; set; }
     }
 }

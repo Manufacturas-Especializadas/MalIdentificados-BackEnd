@@ -1,9 +1,10 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
+using MediatR;
 
 namespace Application.Features.Lines.Commands
 {
-    public class CreateLineCommandHandler
+    public class CreateLineCommandHandler : IRequestHandler<CreateLineCommand, int>
     {
         private readonly IApplicationDbContext _context;
 
@@ -18,7 +19,7 @@ namespace Application.Features.Lines.Commands
 
             DateTime nowInMexico = TimeZoneInfo.ConvertTime(DateTime.UtcNow, mexicoTimeZone);
 
-            var newLine = new Line
+            var newLine = new Domain.Entities.Lines
             {
                 LineName = request.LineName,
                 CreatedAt = nowInMexico,

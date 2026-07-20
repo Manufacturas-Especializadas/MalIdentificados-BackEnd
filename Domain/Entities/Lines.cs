@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public class Line
+    public class Lines
     {
         public int Id { get; set; }
 

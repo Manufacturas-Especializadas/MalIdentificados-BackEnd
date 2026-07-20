@@ -18,7 +18,7 @@
 
         public Client? Client { get; set; }
 
-        public Line? Line { get; set; }
+        public Lines? Line { get; set; }
 
         public ICollection<ContainerValidation> ContainerValidations { get; set; } = new List<ContainerValidation>();
     }

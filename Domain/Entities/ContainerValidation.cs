@@ -6,15 +6,17 @@
 
         public string ContainerNumber { get; set; } = string.Empty;
 
-        public int PayrollNumber { get; set; }
+        public int? PayrollNumber { get; set; }
 
-        public int IdPartNumber { get; set; }
+        public int? IdPartNumber { get; set; }
 
         public int RequiredQuantity { get; set; }
 
         public int ScannedQuantity { get; set; } = 0;
 
         public string? Status { get; set; }
+
+        public string? ExpectedPartCode { get; set; }
 
         public PartNumber? PartNumber { get; set; }
 

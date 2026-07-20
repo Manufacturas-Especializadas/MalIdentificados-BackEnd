@@ -5,11 +5,12 @@ namespace Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
-        DbSet<Line> Lines { get; }
+        DbSet<Lines> Lines { get; }
         DbSet<Client> Clients { get; }
         DbSet<PartNumber> PartNumbers { get; }
         DbSet<ContainerValidation> ContainerValidations { get; }
         DbSet<ScanDetail> ScanDetails { get; }
+        //DbSet<QualityApprover> QualityApprovers { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

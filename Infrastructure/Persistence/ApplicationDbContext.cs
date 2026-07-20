@@ -10,7 +10,7 @@ namespace Infrastructure.Persistence
         {
         }
 
-        public DbSet<Line> Lines => Set<Line>();
+        public DbSet<Lines> Lines => Set<Lines>();
 
         public DbSet<Client> Clients => Set<Client>();
 
@@ -20,11 +20,13 @@ namespace Infrastructure.Persistence
 
         public DbSet<ScanDetail> ScanDetails => Set<ScanDetail>();
 
+        //public DbSet<QualityApprover> QualityApprovers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Line>(entity =>
+            modelBuilder.Entity<Lines>(entity =>
             {
                 entity.ToTable("Lines");
                 entity.HasKey(e => e.Id);
@@ -68,8 +70,10 @@ namespace Infrastructure.Persistence
             {
                 entity.ToTable("ContainerValidations");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.ContainerNumber).HasColumnName("containerNumber").IsRequired();
-                entity.Property(e => e.PayrollNumber).HasColumnName("payrollNumber");
+                entity.Property(e => e.ContainerNumber).HasColumnName("containerNumber").IsRequired(false);
+                entity.Property(e => e.IdPartNumber).HasColumnName("idPartNumber").IsRequired(false);
+                entity.Property(e => e.PayrollNumber).HasColumnName("payrollNumber").IsRequired(false);
+                entity.Property(e => e.ExpectedPartCode).HasColumnName("expectedPartCode");
                 entity.Property(e => e.IdPartNumber).HasColumnName("idPartNumber");
                 entity.Property(e => e.RequiredQuantity).HasColumnName("requiredQuantity");
                 entity.Property(e => e.ScannedQuantity).HasColumnName("scannedQuantity");
@@ -85,6 +89,7 @@ namespace Infrastructure.Persistence
             {
                 entity.ToTable("ScanDetails");
                 entity.HasKey(e => e.Id);
+                //entity.Ignore(e => e.ReleasedBy);
                 entity.Property(e => e.IdValidation).HasColumnName("idValidation");
                 entity.Property(e => e.ScannedPartCode).HasColumnName("scannedPartCode").HasMaxLength(100).IsRequired();
                 entity.Property(e => e.IsCorrect).HasColumnName("isCorrect");
@@ -93,7 +98,11 @@ namespace Infrastructure.Persistence
                 entity.HasOne(d => d.ContainerValidation)
                     .WithMany(p => p.ScanDetails)
                     .HasForeignKey(d => d.IdValidation)
-                    .OnDelete(DeleteBehavior.Cascade); 
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.Property(e => e.ReleasedByPayroll)
+                      .HasColumnName("releasedByPayroll")
+                      .IsRequired(false);
             });
         }
     }
