@@ -18,7 +18,9 @@
 
         public string? ExpectedPartCode { get; set; }
 
-        public PartNumber? PartNumber { get; set; }
+        public string? ShopOrder { get; set; }
+
+        public PartNumber? PartNumber { get; set; }        
 
         public ICollection<ScanDetail> ScanDetails { get; set; } = new List<ScanDetail>();
     }

@@ -24,6 +24,7 @@ namespace Application.Features.Scanning.Commands.RegisterCompletedBatch
             var newValidation = new ContainerValidation
             {
                 PayrollNumber = request.PayrollNumber,
+                ShopOrder = request.shopOrder,
                 ExpectedPartCode = request.ExpectedPartCode,
                 IdPartNumber = catalogPart?.Id,
                 RequiredQuantity = request.RequiredQuantity,

@@ -76,6 +76,7 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.ExpectedPartCode).HasColumnName("expectedPartCode");
                 entity.Property(e => e.IdPartNumber).HasColumnName("idPartNumber");
                 entity.Property(e => e.RequiredQuantity).HasColumnName("requiredQuantity");
+                entity.Property(e => e.ShopOrder).HasColumnName("shopOrder").HasMaxLength(50);
                 entity.Property(e => e.ScannedQuantity).HasColumnName("scannedQuantity");
                 entity.Property(e => e.Status).HasColumnName("status").HasMaxLength(20);
 

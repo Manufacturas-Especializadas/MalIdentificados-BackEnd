@@ -13,6 +13,7 @@ namespace Application.Features.Scanning.Commands
         int PayrollNumber,
         string ExpectedPartCode,
         int RequiredQuantity,
+        string shopOrder,
         List<ScanDetailDto> Scans
     ) : IRequest<int>;
 }
