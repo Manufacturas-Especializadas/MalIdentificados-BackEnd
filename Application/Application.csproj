@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Traceability\" />
+    <Folder Include="Features\Traceability\Queries\" />
   </ItemGroup>
 
 </Project>
