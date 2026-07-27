@@ -8,10 +8,10 @@
         int RequiredQuantity,
         int ScannedQuantity,
         string? Status,
-        List<ScanDetailDto> ScanDetails
+        List<ScanDetailsDto> ScanDetails
     );
 
-    public record ScanDetailDto(
+    public record ScanDetailsDto(
         int Id,
         string ScannedPartCode,
         bool IsCorrect,
