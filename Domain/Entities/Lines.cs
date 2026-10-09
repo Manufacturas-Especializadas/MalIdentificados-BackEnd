@@ -11,5 +11,7 @@
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<PartNumber> PartNumbers { get; set; } = new List<PartNumber>();
+
+        public ICollection<ContainerValidation> ContainerValidations { get; set; } = new List<ContainerValidation>();
     }
 }

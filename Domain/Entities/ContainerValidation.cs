@@ -4,7 +4,11 @@
     {
         public int Id { get; set; }
 
-        public string ContainerNumber { get; set; } = string.Empty;
+        public string? ContainerNumber { get; set; } = string.Empty;
+
+        public int? LineId { get; set; }
+
+        public Lines? Line { get; set; }
 
         public int? PayrollNumber { get; set; }
 
