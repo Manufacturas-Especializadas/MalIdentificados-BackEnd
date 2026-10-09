@@ -15,8 +15,12 @@ namespace Application.Features.Traceability.Queries
 
         public async Task<List<ValidationDto>> Handle(GetTraceabilityQuery request, CancellationToken cancellationToken)
         {
-            var validations = await _context.ContainerValidations
-                    .AsNoTracking()
+            var query = _context.ContainerValidations.AsNoTracking();
+
+            if (request.LineId.HasValue)
+                query = query.Where(v => v.LineId == request.LineId.Value);
+
+            var validations = await query
                     .OrderByDescending(v => v.Id)
                     .Take(50)
                     .Select(v => new ValidationDto(
@@ -34,7 +38,9 @@ namespace Application.Features.Traceability.Queries
                                             s.IsCorrect,
                                             s.ScanDate,
                                             s.ReleasedByPayroll
-                                        )).ToList()
+                                        )).ToList(),
+                        v.LineId,
+                        v.Line != null ? v.Line.LineName : null
                     )).ToListAsync(cancellationToken);
 
             return validations;

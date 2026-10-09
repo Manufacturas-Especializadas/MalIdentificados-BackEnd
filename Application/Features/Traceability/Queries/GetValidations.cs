@@ -8,7 +8,9 @@
         int RequiredQuantity,
         int ScannedQuantity,
         string? Status,
-        List<ScanDetailsDto> ScanDetails
+        List<ScanDetailsDto> ScanDetails,
+        int? LineId = null,
+        string? LineName = null
     );
 
     public record ScanDetailsDto(

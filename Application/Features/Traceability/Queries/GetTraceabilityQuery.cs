@@ -2,5 +2,5 @@
 
 namespace Application.Features.Traceability.Queries
 {
-    public record GetTraceabilityQuery(): IRequest<List<ValidationDto>>;
+    public record GetTraceabilityQuery(int? LineId = null): IRequest<List<ValidationDto>>;
 }

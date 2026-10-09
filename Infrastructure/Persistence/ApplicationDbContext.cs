@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Domain.Entities;
 
 namespace Infrastructure.Persistence
@@ -21,6 +22,14 @@ namespace Infrastructure.Persistence
         public DbSet<ScanDetail> ScanDetails => Set<ScanDetail>();
 
         //public DbSet<QualityApprover> QualityApprovers { get; set; }
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            base.ConfigureConventions(configurationBuilder);
+            // Keep the existing FK indexes explicit below. A line index is deferred
+            // until the physical schema and query workload can be reviewed.
+            configurationBuilder.Conventions.Remove(typeof(ForeignKeyIndexConvention));
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,6 +64,9 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.IsActive).HasColumnName("isActive");
                 entity.Property(e => e.CreatedAt).HasColumnName("createdAt");
 
+                entity.HasIndex(e => e.IdClient);
+                entity.HasIndex(e => e.IdLine);
+
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.PartNumbers)
                     .HasForeignKey(d => d.IdClient)
@@ -71,6 +83,7 @@ namespace Infrastructure.Persistence
                 entity.ToTable("ContainerValidations");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.ContainerNumber).HasColumnName("containerNumber").IsRequired(false);
+                entity.Property(e => e.LineId).HasColumnName("lineId").IsRequired(false);
                 entity.Property(e => e.IdPartNumber).HasColumnName("idPartNumber").IsRequired(false);
                 entity.Property(e => e.PayrollNumber).HasColumnName("payrollNumber").IsRequired(false);
                 entity.Property(e => e.ExpectedPartCode).HasColumnName("expectedPartCode");
@@ -79,11 +92,18 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.ShopOrder).HasColumnName("shopOrder").HasMaxLength(50);
                 entity.Property(e => e.ScannedQuantity).HasColumnName("scannedQuantity");
                 entity.Property(e => e.Status).HasColumnName("status").HasMaxLength(20);
+                entity.HasIndex(e => e.IdPartNumber);
+
+                entity.HasOne(d => d.Line)
+                    .WithMany(l => l.ContainerValidations)
+                    .HasForeignKey(d => d.LineId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.PartNumber)
                     .WithMany(p => p.ContainerValidations)
                     .HasForeignKey(d => d.IdPartNumber)
                     .OnDelete(DeleteBehavior.Restrict);
+
             });
 
             modelBuilder.Entity<ScanDetail>(entity =>
@@ -95,6 +115,7 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.ScannedPartCode).HasColumnName("scannedPartCode").HasMaxLength(100).IsRequired();
                 entity.Property(e => e.IsCorrect).HasColumnName("isCorrect");
                 entity.Property(e => e.ScanDate).HasColumnName("scanDate");
+                entity.HasIndex(e => e.IdValidation);
 
                 entity.HasOne(d => d.ContainerValidation)
                     .WithMany(p => p.ScanDetails)

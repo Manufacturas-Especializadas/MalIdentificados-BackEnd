@@ -16,11 +16,17 @@ namespace API.Controllers
         }
 
         [HttpGet("validations")]
-        public async Task<ActionResult<List<ValidationDto>>> GetValidations()
+        public async Task<ActionResult<List<ValidationDto>>> GetValidations([FromQuery] int? lineId = null)
         {
-            var query = new GetTraceabilityQuery();
+            if (lineId is <= 0)
+            {
+                ModelState.AddModelError("lineId", "La línea debe ser un entero positivo.");
+                return ValidationProblem(ModelState);
+            }
 
-            var result = await _mediator.Send(query);
+            var query = new GetTraceabilityQuery(lineId);
+
+            var result = await _mediator.Send(query, HttpContext.RequestAborted);
 
             return Ok(result);
         }

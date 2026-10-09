@@ -26,9 +26,17 @@ namespace API.Controllers
         [HttpPost("start")]
         public async Task<ActionResult<int>> StartValidation([FromBody] RegisterCompletedBatchCommand command)
         {
-            var validationId = await _mediator.Send(command);
+            try
+            {
+                var validationId = await _mediator.Send(command, HttpContext.RequestAborted);
 
-            return Ok(new { validationId, message = "Sesión iniciada correctamente." });
+                return Ok(new { validationId, message = "Sesión iniciada correctamente." });
+            }
+            catch (BatchValidationException exception)
+            {
+                ModelState.AddModelError(exception.Field, exception.Message);
+                return ValidationProblem(ModelState);
+            }
         }
     }
 }
